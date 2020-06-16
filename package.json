@@ -1,0 +1,38 @@
+{
+  "name": "boot-plugin",
+  "publisher": "theia",
+  "keywords": [
+    "theia-plugin"
+  ],
+  "version": "0.0.1",
+  "license": "none",
+  "files": [
+    "src"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "devDependencies": {
+    "@eclipse-che/api": "^7.5.0-SNAPSHOT",
+    "@eclipse-che/plugin": "^0.0.1-1591787202",
+    "@theia/plugin": "1.1.0",
+    "@theia/plugin-packager": "latest",
+    "rimraf": "2.6.2",
+    "typescript": "2.9.2",
+    "typescript-formatter": "7.2.2"
+  },
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "rimraf lib",
+    "format-code": "tsfmt -r",
+    "watch": "tsc -watch",
+    "compile": "tsc",
+    "build": "yarn run format-code && yarn run compile && theia-plugin pack"
+  },
+  "engines": {
+    "theiaPlugin": "next"
+  },
+  "theiaPlugin": {
+    "backend": "lib/boot-plugin-backend.js"
+  }
+}
