@@ -8,7 +8,10 @@ import * as theia from "@theia/plugin";
 
 export async function start(context: theia.PluginContext) {
   const tasks = await theia.tasks.fetchTasks({ type: "che" });
-  tasks.map(({ name }) => console.log(`Task name: ${name}`));
+  tasks.map((task) => {
+    const { name } = task
+    console.log(`Task name: ${name}`)
+  }
   // const containersService = new ContainersService();
 
   // containersService.updateContainers().then(() => {
