@@ -11,7 +11,7 @@ export function start(context: theia.PluginContext) {
   theia.tasks.fetchTasks({ type: "che" }).then(
     (tasks) => {
       console.log("Tasks:");
-      console.log(tasks);
+      //   console.log(tasks);
       tasks.map((task) => {
         const { name } = task;
         theia.window.showInformationMessage(`Task name: ${name}`);
