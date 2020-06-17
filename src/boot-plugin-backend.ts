@@ -7,7 +7,8 @@ import * as theia from "@theia/plugin";
 // import { ContainersService } from "./containers-service";
 
 export function start(context: theia.PluginContext) {
-  theia.tasks.fetchTasks({ type: "che" }).then(
+  console.log("Logging tasks:");
+  theia.tasks.fetchTasks().then(
     (tasks) => {
       console.log("Tasks:");
       console.log(tasks);
