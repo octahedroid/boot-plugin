@@ -6,12 +6,21 @@ import * as theia from "@theia/plugin";
 
 // import { ContainersService } from "./containers-service";
 
-export async function start(context: theia.PluginContext) {
-  const tasks = await theia.tasks.fetchTasks({ type: "che" });
-  tasks.map((task) => {
-    const { name } = task;
-    theia.window.showErrorMessage(`Task name: ${name}`);
-  });
+export function start(context: theia.PluginContext) {
+  theia.tasks.fetchTasks({ type: "che" }).then(
+    (tasks) => {
+      console.log("Tasks:");
+      console.log(tasks);
+      tasks.map((task) => {
+        const { name } = task;
+        theia.window.showInformationMessage(`Task name: ${name}`);
+      });
+    },
+    (reason) => {
+      console.error("No tasks :(");
+      console.log(reason);
+    }
+  );
 
   //   const containersService = new ContainersService();
 
