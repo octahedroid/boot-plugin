@@ -9,20 +9,23 @@ import * as theia from "@theia/plugin";
 export async function start(context: theia.PluginContext) {
   const tasks = await theia.tasks.fetchTasks({ type: "che" });
   tasks.map((task) => {
-    const { name } = task
-    console.log(`Task name: ${name}`)
-  }
-  // const containersService = new ContainersService();
+    const { name } = task;
+    theia.window.showErrorMessage(`Task name: ${name}`);
+  });
 
-  // containersService.updateContainers().then(() => {
-  //     // treeDataProvider.updateContainersTreeData(containersService.containers);
-  //     const containers = containersService.containers;
-  //     containers.forEach(({ commands,  }) => {
-  //     });
-  // }, error => {
-  //     console.error(error);
-  //     theia.window.showErrorMessage(error);
-  // });
+  //   const containersService = new ContainersService();
+
+  //   containersService.updateContainers().then(
+  //     () => {
+  //       // treeDataProvider.updateContainersTreeData(containersService.containers);
+  //       const containers = containersService.containers;
+  //       containers.forEach(({ commands }) => {});
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //       theia.window.showErrorMessage(error);
+  //     }
+  //   );
 }
 
 export function stop() {}
