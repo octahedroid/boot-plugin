@@ -11,8 +11,7 @@ const start = (context: theia.PluginContext) => {
   theia.tasks.fetchTasks({ type: "che" }).then(
     (tasks) => {
       for (const task of tasks) {
-        console.log(task.name);
-        console.log(task.definition);
+        theia.window.showInformationMessage("Task in ctx:", task.name);
       }
     },
     (reason) => {
