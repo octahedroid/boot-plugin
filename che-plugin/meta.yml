@@ -2,7 +2,7 @@ apiVersion: v2
 publisher: octahedroid
 name: boot-plugin
 version: 0.0.1
-type: Che Plugin
+type: Theia plugin
 displayName: Boot plugin
 title: Boot plugin
 description: Che Plug-in to boot on namespace
