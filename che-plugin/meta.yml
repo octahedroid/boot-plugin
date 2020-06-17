@@ -1,0 +1,14 @@
+apiVersion: v2
+publisher: octahedroid
+name: boot-plugin
+version: 0.0.1
+type: Che Plugin
+displayName: Boot plugin
+title: Boot plugin
+description: Che Plug-in to boot on namespace
+icon: https://www.eclipse.org/che/images/logo-eclipseche.svg
+repository: repository: https://github.com/octahedroid/boot-plugin/
+firstPublicationDate: "2020-06-17"
+category: Other
+spec:
+  extensions: https://github.com/octahedroid/boot-plugin/releases/download/v0.0.1/boot_plugin.theia

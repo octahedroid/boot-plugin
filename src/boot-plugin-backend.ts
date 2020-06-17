@@ -12,9 +12,9 @@ export function start(context: theia.PluginContext) {
     containersService.updateContainers().then(() => {
         // treeDataProvider.updateContainersTreeData(containersService.containers);
         const containers = containersService.containers;
-        containers.forEach(function (value) {
+        containers.forEach(function(value) {
             theia.window.showInformationMessage(value.name);
-        }); 
+        });
     }, error => {
         console.error(error);
         theia.window.showErrorMessage(error);
