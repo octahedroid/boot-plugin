@@ -14,7 +14,7 @@ projects:
     source:
       location: "https://github.com/octahedroid/boot-plugin.git"
       type: git
-      branch: start-testing
+      branch: master
 attributes:
   persistVolumes: "false"
 components:
