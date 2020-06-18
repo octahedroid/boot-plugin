@@ -15,6 +15,11 @@ projects:
       location: "https://github.com/octahedroid/boot-plugin.git"
       type: git
       branch: master
+  - name: gatsby-casper
+    source:
+      location: 'https://github.com/jmolivas/gatsby-casper.git'
+      type: git
+      branch: master
 attributes:
   persistVolumes: "false"
 components:
@@ -29,6 +34,17 @@ components:
     type: dockerimage
     image: "quay.io/eclipse/che-theia-dev:next"
     alias: che-dev
+  - mountSources: true
+    endpoints:
+      - name: nodejs
+        port: 8000
+        attributes:
+          protocol: http
+          public: 'true'
+    memoryLimit: 2Gi
+    type: dockerimage
+    image: 'quay.io/eclipse/che-nodejs10-community:7.14.1'
+    alias: nodejs
   - id: redhat/vscode-yaml/latest
     type: chePlugin
   - id: che-incubator/typescript/latest
@@ -170,3 +186,9 @@ commands:
           export LOCAL_GIT_DIRECTORY=/usr && yarn start /tmp/theiadev_projects
           --hostname=0.0.0.0 --port=3010
         component: che-dev
+  - name: start develop mode
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/gatsby-casper'
+        type: exec
+        command: yarn && yarn start 
+        component: nodejs
