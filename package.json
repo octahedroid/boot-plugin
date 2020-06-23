@@ -12,6 +12,25 @@
   "activationEvents": [
     "*"
   ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Che task preview configuration",
+      "properties": {
+        "che.task.preview.notifications": {
+          "type": "string",
+          "default": "off",
+          "enum": [
+            "on",
+            "alwaysPreview",
+            "alwaysGoTo",
+            "off"
+          ],
+          "description": "Enable/disable the notifications with a proposal to open a Che task's preview URL. Can be: 'on', 'alwaysPreview', 'alwaysGoTo' or 'off'."
+        }
+      }
+    }
+  },
   "devDependencies": {
     "@eclipse-che/api": "^7.5.0-SNAPSHOT",
     "@eclipse-che/plugin": "^0.0.1-1591787202",
@@ -34,5 +53,8 @@
   },
   "theiaPlugin": {
     "backend": "lib/boot-plugin-backend.js"
+  },
+  "dependencies": {
+    "@eclipse-che/workspace-client": "0.0.1-1585913592"
   }
 }
