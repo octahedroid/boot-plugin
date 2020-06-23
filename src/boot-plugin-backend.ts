@@ -8,52 +8,64 @@ import * as che from "@eclipse-che/plugin";
 
 const SHELL_TASK_TYPE = "shell";
 
-theia.tasks.onDidEndTask((e: theia.TaskEndEvent) => {
+theia.tasks.onDidEndTask(async (e: theia.TaskEndEvent) => {
   const { execution } = e;
   const { task } = execution;
   const { execution: exec, name } = task;
-  if (name === "Test task") {
-    console.log("Test task ended:");
-    console.log(task);
-    console.log(exec);
+  if (name === "Yarn install") {
+    console.log("Test task ended, beginning Dev task:");
+    const initTask: theia.Task = {
+      name: "Yarn Dev",
+      source: SHELL_TASK_TYPE,
+      scope: theia.TaskScope.Workspace,
+      definition: {
+        type: SHELL_TASK_TYPE,
+        component: "nodejs",
+        echo: true,
+        clear: false,
+        workingDir: "/projects/gatsby-casper",
+        target: {
+          containerName: "nodejs",
+        },
+      },
+      execution: {
+        command: "yarn",
+        args: ["dev"],
+        options: {
+          cwd: "/projects/gatsby-casper",
+        },
+      },
+    };
+
+    await theia.tasks.executeTask(initTask);
   }
 });
 
 const start = async (context: theia.PluginContext) => {
   await che.workspace.getCurrentWorkspace();
-  const bashTasks = await theia.tasks.fetchTasks();
-  console.table(bashTasks);
-  bashTasks.map((task) => {
-    console.log("Definition:");
-    console.table(task.definition);
-    console.log("Execution:");
-    console.log(task.execution);
-  });
   const initTask: theia.Task = {
-    name: "Test task",
+    name: "Yarn install",
     source: SHELL_TASK_TYPE,
-    scope: theia.TaskScope.Global,
+    scope: theia.TaskScope.Workspace,
     definition: {
       type: SHELL_TASK_TYPE,
-      component: "che-dev",
+      component: "nodejs",
       echo: true,
       clear: false,
       workingDir: "/projects/gatsby-casper",
       target: {
-        containerName: "che-dev",
+        containerName: "nodejs",
       },
     },
     execution: {
       command: "yarn",
-      args: ["dev"],
       options: {
-        // shellArgs: ["Hello world"],
         cwd: "/projects/gatsby-casper",
       },
     },
   };
 
-  theia.tasks.executeTask(initTask);
+  await theia.tasks.executeTask(initTask);
 };
 
 function stop() {}
