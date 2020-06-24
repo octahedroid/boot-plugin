@@ -27,9 +27,11 @@ const start = async (context: theia.PluginContext) => {
         component: "nodejs",
         workingDir: "/projects/frontend",
       },
+      cwd: "/projects/frontend",
       previewUrl: "",
     },
     execution: {
+      cwd: "/projects/frontend",
       options: {
         cwd: "/projects/frontend",
       },
