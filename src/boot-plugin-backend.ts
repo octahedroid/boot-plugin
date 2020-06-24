@@ -4,25 +4,22 @@
 
 import * as theia from "@theia/plugin";
 import * as che from "@eclipse-che/plugin";
-const SHELL_TASK_TYPE = "shell";
+import { TaskTypes, TaskStatus } from "./task";
+
 const start = async (context: theia.PluginContext) => {
   await che.workspace.getCurrentWorkspace();
   const initTask: theia.Task = {
-    name: "Develop",
+    name: TaskStatus.INSTALL,
     definition: {
-      type: "che",
-      label: "Yarn install",
-      command: "yarn && yarn develop",
+      type: TaskTypes.CHE,
       target: {
-        workspaceId: "",
         component: "nodejs",
+        containerName: "nodejs",
         workingDir: "/projects/frontend",
       },
-      previewUrl: "",
     },
     execution: {
-      // command: "yarn",
-      // args: ["&&", "yarn", "develop"],
+      command: "yarn && yarn develop",
       options: {
         cwd: "/projects/frontend",
       },
