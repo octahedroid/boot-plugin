@@ -3,8 +3,7 @@
  */
 
 import * as theia from "@theia/plugin";
-
-const SHELL_TASK_TYPE = "shell";
+import * as che from "@eclipse-che/plugin";
 
 // theia.tasks.onDidEndTask(async (e: theia.TaskEndEvent) => {
 //   const { execution } = e;
@@ -66,8 +65,8 @@ const SHELL_TASK_TYPE = "shell";
 // };
 
 const start = async (context: theia.PluginContext) => {
+  await che.workspace.getCurrentWorkspace();
   const initTask: theia.Task = {
-    name: "start develop",
     definition: {
       type: "che",
       label: "start develop",
