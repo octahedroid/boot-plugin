@@ -24,7 +24,6 @@ const start = async (context: theia.PluginContext) => {
       type: SHELL_TASK_TYPE,
       component: "nodejs",
       echo: true,
-      command: "yarn && yarn develop",
       clear: false,
       workingDir: "/projects/frontend",
       target: {
@@ -32,6 +31,7 @@ const start = async (context: theia.PluginContext) => {
       },
     },
     execution: {
+      command: "yarn && yarn develop",
       options: {
         cwd: "/projects/frontend",
       },
