@@ -67,14 +67,20 @@ const SHELL_TASK_TYPE = "shell";
 
 const start = async (context: theia.PluginContext) => {
   const initTask: theia.Task = {
+    name: "start develop",
     definition: {
       type: "che",
-      label: "Yarn install",
+      label: "start develop",
       command: "yarn && yarn develop",
       target: {
         workspaceId: "",
         component: "nodejs",
         workingDir: "/projects/frontend",
+      },
+      execution: {
+        options: {
+          cwd: "/projects/frontend",
+        },
       },
     },
   };
