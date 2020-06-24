@@ -7,20 +7,17 @@ import * as che from "@eclipse-che/plugin";
 import { bootTasks } from "./tasks";
 
 const handleEndTask = async (event: che.TaskExitedEvent) => {
-  // const { execution } = event;
-  // const { task } = execution;
-  // const { name } = task;
-
-  // switch (name) {
-  //   case "install":
-  //     await theia.tasks.executeTask(bootTasks.develop);
-  //     break;
-  //   case "develop":
-  //     console.log("Develop task ended!!!");
-  //     break;
-  // }
-  console.log("Task Exited Event:");
-  console.log(event);
+  const { execution } = event;
+  const { task } = execution;
+  const { name } = task;
+  switch (name) {
+    case "install":
+      await theia.tasks.executeTask(bootTasks.develop);
+      break;
+    case "develop":
+      console.log("Develop task ended!!!");
+      break;
+  }
 };
 
 che.task.onDidEndTask(handleEndTask);

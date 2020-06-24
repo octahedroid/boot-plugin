@@ -30,8 +30,10 @@ const bootTasks: {
     scope: TaskScope.Workspace,
     definition: {
       type: "che",
-      preview: {
-        notifications: "off",
+      config: {
+        preview: {
+          notifications: "off",
+        },
       },
       target: {
         component: "che-dev",
