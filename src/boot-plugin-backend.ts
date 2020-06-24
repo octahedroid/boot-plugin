@@ -7,10 +7,9 @@ import * as che from "@eclipse-che/plugin";
 import { bootTasks } from "./tasks";
 
 const handleEndTask = async (event: che.TaskExitedEvent) => {
-  const { execution } = event;
-  const { task } = execution;
-  const { name } = task;
-  switch (name) {
+  const { config } = event;
+  const { label } = config!;
+  switch (label) {
     case "install":
       await theia.tasks.executeTask(bootTasks.develop);
       break;
