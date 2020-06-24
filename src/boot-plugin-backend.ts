@@ -21,8 +21,8 @@ const start = async (context: theia.PluginContext) => {
       previewUrl: "",
     },
     execution: {
-      command: "yarn",
-      args: ["&&", "yarn", "develop"],
+      // command: "yarn",
+      // args: ["&&", "yarn", "develop"],
       options: {
         cwd: "/projects/frontend",
       },
