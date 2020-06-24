@@ -10,8 +10,8 @@ const bootTasks: {
     definition: {
       type: "che",
       target: {
-        component: "nodejs",
-        containerName: "nodejs",
+        component: "che-dev",
+        containerName: "che-dev",
         workingDir: "/projects/frontend",
       },
     },
