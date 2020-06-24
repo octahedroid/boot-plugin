@@ -8,6 +8,8 @@ import { bootTasks } from "./tasks";
 
 const handleEndTask = async (event: che.TaskExitedEvent) => {
   const { config } = event;
+  console.log("Config:");
+  console.log(config);
   const { label } = config!;
   switch (label) {
     case "install":
