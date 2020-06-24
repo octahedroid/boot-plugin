@@ -76,11 +76,7 @@ const start = async (context: theia.PluginContext) => {
         workspaceId: "",
         component: "nodejs",
         workingDir: "/projects/frontend",
-      },
-      execution: {
-        options: {
-          cwd: "/projects/frontend",
-        },
+        cwd: "/projects/frontend",
       },
     },
   };
