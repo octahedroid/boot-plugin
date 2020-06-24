@@ -65,8 +65,8 @@ import * as che from "@eclipse-che/plugin";
 // };
 
 const start = async (context: theia.PluginContext) => {
-  await che.workspace.getCurrentWorkspace();
   const initTask: theia.Task = {
+    name: "start develop",
     definition: {
       type: "che",
       label: "start develop",
@@ -75,12 +75,11 @@ const start = async (context: theia.PluginContext) => {
         workspaceId: "",
         component: "nodejs",
         workingDir: "/projects/frontend",
-        cwd: "/projects/frontend",
       },
-      execution: {
-        options: {
-          cwd: "/projects/frontend",
-        },
+    },
+    execution: {
+      options: {
+        cwd: "/projects/frontend",
       },
     },
   };
