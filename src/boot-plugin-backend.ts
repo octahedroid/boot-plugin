@@ -4,49 +4,7 @@
 
 import * as theia from "@theia/plugin";
 import * as che from "@eclipse-che/plugin";
-
-const bootTasks: {
-  install: theia.Task;
-  develop: theia.Task;
-} = {
-  install: {
-    name: "install",
-    scope: theia.TaskScope.Workspace,
-    definition: {
-      type: "che",
-      target: {
-        component: "nodejs",
-        containerName: "nodejs",
-        workingDir: "/projects/frontend",
-      },
-    },
-    execution: {
-      command: "yarn",
-      options: {
-        cwd: "/projects/frontend",
-      },
-    },
-  },
-  develop: {
-    name: "develop",
-    scope: theia.TaskScope.Workspace,
-    definition: {
-      type: "che",
-      target: {
-        component: "nodejs",
-        containerName: "nodejs",
-        workingDir: "/projects/frontend",
-      },
-    },
-    execution: {
-      command: "yarn",
-      args: ["develop"],
-      options: {
-        cwd: "/projects/frontend",
-      },
-    },
-  },
-};
+import { bootTasks } from "./tasks";
 
 const handleEndTask = async (event: theia.TaskEndEvent) => {
   const { execution } = event;
