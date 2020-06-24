@@ -78,6 +78,11 @@ const start = async (context: theia.PluginContext) => {
         workingDir: "/projects/frontend",
         cwd: "/projects/frontend",
       },
+      execution: {
+        options: {
+          cwd: "/projects/frontend",
+        },
+      },
     },
   };
   await theia.tasks.executeTask(initTask);
