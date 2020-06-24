@@ -9,6 +9,7 @@ const start = async (context: theia.PluginContext) => {
   await che.workspace.getCurrentWorkspace();
   const initTask: theia.Task = {
     name: "Install",
+    scope: theia.TaskScope.Workspace,
     definition: {
       type: "che",
       target: {
@@ -18,7 +19,8 @@ const start = async (context: theia.PluginContext) => {
       },
     },
     execution: {
-      command: "yarn && yarn develop",
+      command: "yarn",
+      args: ["&& yarn develop"],
       options: {
         cwd: "/projects/frontend",
       },
