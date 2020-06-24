@@ -9,33 +9,25 @@ theia.tasks.onDidEndTask(async (e: theia.TaskEndEvent) => {
   const { execution } = e;
   const { task } = execution;
   const { name } = task;
-  if (name === "Yarn Install") {
+  if (name === "Yarn install chingado") {
+    console.log("Exec:");
+    console.log(execution);
   }
 });
 
 const start = async (context: theia.PluginContext) => {
   await che.workspace.getCurrentWorkspace();
   const initTask: theia.Task = {
-    name: "Yarn Dev",
-    source: SHELL_TASK_TYPE,
-    scope: theia.TaskScope.Workspace,
     definition: {
-      label: "Yarn Dev label",
-      type: SHELL_TASK_TYPE,
-      component: "nodejs",
-      echo: true,
-      clear: false,
-      workingDir: "/projects/frontend",
+      type: "che",
+      label: "Yarn install chingado",
+      command: "yarn && yarn develop",
       target: {
-        containerName: "nodejs",
+        workspaceId: "",
+        component: "nodejs",
+        workingDIr: "/projects/frontend",
       },
-    },
-    execution: {
-      command: "yarn",
-      args: ["&&", "yarn", "develop"],
-      options: {
-        cwd: "/projects/frontend",
-      },
+      previewUrl: "",
     },
   };
 
