@@ -4,14 +4,13 @@
 
 import * as theia from "@theia/plugin";
 import * as che from "@eclipse-che/plugin";
-import { TaskTypes, TaskStatus } from "./task";
 
 const start = async (context: theia.PluginContext) => {
   await che.workspace.getCurrentWorkspace();
   const initTask: theia.Task = {
-    name: TaskStatus.INSTALL,
+    name: "Install",
     definition: {
-      type: TaskTypes.CHE,
+      type: "che",
       target: {
         component: "nodejs",
         containerName: "nodejs",
