@@ -6,61 +6,78 @@ import * as theia from "@theia/plugin";
 
 const SHELL_TASK_TYPE = "shell";
 
-theia.tasks.onDidEndTask(async (e: theia.TaskEndEvent) => {
-  const { execution } = e;
-  const { task } = execution;
-  const { name } = task;
-  if (name === "Yarn Install") {
-    const initTask: theia.Task = {
-      name: "Yarn Dev",
-      source: SHELL_TASK_TYPE,
-      scope: theia.TaskScope.Workspace,
-      definition: {
-        type: SHELL_TASK_TYPE,
-        component: "nodejs",
-        echo: true,
-        clear: false,
-        workingDir: "/projects/frontend",
-        target: {
-          containerName: "nodejs",
-        },
-      },
-      execution: {
-        command: "yarn",
-        args: ["dev"],
-        options: {
-          cwd: "/projects/frontend",
-        },
-      },
-    };
+// theia.tasks.onDidEndTask(async (e: theia.TaskEndEvent) => {
+//   const { execution } = e;
+//   const { task } = execution;
+//   const { name } = task;
+//   if (name === "Yarn Install") {
+//     const initTask: theia.Task = {
+//       name: "Yarn Dev",
+//       source: SHELL_TASK_TYPE,
+//       scope: theia.TaskScope.Workspace,
+//       definition: {
+//         type: SHELL_TASK_TYPE,
+//         component: "nodejs",
+//         echo: true,
+//         clear: false,
+//         workingDir: "/projects/frontend",
+//         target: {
+//           containerName: "nodejs",
+//         },
+//       },
+//       execution: {
+//         command: "yarn",
+//         args: ["dev"],
+//         options: {
+//           cwd: "/projects/frontend",
+//         },
+//       },
+//     };
 
-    await theia.tasks.executeTask(initTask);
-  }
-});
+//     await theia.tasks.executeTask(initTask);
+//   }
+// });
+
+// const start = async (context: theia.PluginContext) => {
+//   const initTask: theia.Task = {
+//     name: "Yarn Install",
+//     source: SHELL_TASK_TYPE,
+//     scope: theia.TaskScope.Workspace,
+//     definition: {
+//       preview: {},
+//       type: SHELL_TASK_TYPE,
+//       component: "nodejs",
+//       echo: true,
+//       clear: false,
+//       workingDir: "/projects/frontend",
+//       target: {
+//         containerName: "nodejs",
+//       },
+//     },
+//     execution: {
+//       command: "yarn",
+//       options: {
+//         cwd: "/projects/frontend",
+//       },
+//     },
+//   };
+
+//   await theia.tasks.executeTask(initTask);
+// };
 
 const start = async (context: theia.PluginContext) => {
   const initTask: theia.Task = {
-    name: "Yarn Install",
-    source: SHELL_TASK_TYPE,
-    scope: theia.TaskScope.Workspace,
     definition: {
-      type: SHELL_TASK_TYPE,
-      component: "nodejs",
-      echo: true,
-      clear: false,
-      workingDir: "/projects/frontend",
+      type: "che",
+      label: "Yarn install",
+      command: "yarn && yarn develop",
       target: {
-        containerName: "nodejs",
-      },
-    },
-    execution: {
-      command: "yarn",
-      options: {
-        cwd: "/projects/frontend",
+        workspaceId: "",
+        component: "nodejs",
+        workingDir: "/projects/frontend",
       },
     },
   };
-
   await theia.tasks.executeTask(initTask);
 };
 
