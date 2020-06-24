@@ -11,8 +11,13 @@ const handleEndTask = async (event: theia.TaskEndEvent) => {
   const { task } = execution;
   const { name } = task;
 
-  if (name === "install") {
-    await theia.tasks.executeTask(bootTasks.develop);
+  switch (name) {
+    case "install":
+      await theia.tasks.executeTask(bootTasks.develop);
+      break;
+    case "develop":
+      console.log("Develop task ended!!!");
+      break;
   }
 };
 
