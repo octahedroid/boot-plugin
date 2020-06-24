@@ -9,6 +9,9 @@ const bootTasks: {
     scope: TaskScope.Workspace,
     definition: {
       type: "che",
+      preview: {
+        notifications: "off",
+      },
       target: {
         component: "che-dev",
         containerName: "che-dev",
@@ -27,6 +30,9 @@ const bootTasks: {
     scope: TaskScope.Workspace,
     definition: {
       type: "che",
+      preview: {
+        notifications: "off",
+      },
       target: {
         component: "che-dev",
         containerName: "che-dev",
