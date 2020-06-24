@@ -71,10 +71,12 @@ const start = async (context: theia.PluginContext) => {
       type: "che",
       label: "start develop",
       command: "yarn && yarn develop",
+      cwd: "/projects/frontend",
       target: {
         workspaceId: "",
         component: "nodejs",
         workingDir: "/projects/frontend",
+        cwd: "/projects/frontend",
       },
     },
     execution: {
