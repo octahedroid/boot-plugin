@@ -22,7 +22,7 @@ const tasks: {
     },
     execution: {
       command: "bash",
-      args: ["-c 'yarn && yarn develop'"],
+      args: ["-c", "'yarn && yarn develop'"],
       options: {
         cwd: "/projects/frontend",
       },
