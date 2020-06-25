@@ -1,12 +1,11 @@
 import { Task, TaskScope } from "@theia/plugin";
 
-const bootTasks: {
-  install: Task;
-  develop: Task;
+const tasks: {
+  bootstrap: Task;
 } = {
-  install: {
+  bootstrap: {
     name: "install",
-    scope: TaskScope.Workspace,
+    scope: TaskScope.Global,
     definition: {
       type: "che",
       config: {
@@ -22,31 +21,8 @@ const bootTasks: {
       },
     },
     execution: {
-      command: "yarn",
-      options: {
-        cwd: "/projects/frontend",
-      },
-    },
-  },
-  develop: {
-    name: "develop",
-    scope: TaskScope.Workspace,
-    definition: {
-      type: "che",
-      config: {
-        label: "develop",
-        preview: {
-          notifications: "off",
-        },
-      },
-      target: {
-        component: "che-dev",
-        containerName: "che-dev",
-        workingDir: "/projects/frontend",
-      },
-    },
-    execution: {
-      command: "yarn develop",
+      command: "sh",
+      args: ["-c", "'yarn && yarn develop'"],
       options: {
         cwd: "/projects/frontend",
       },
@@ -54,4 +30,4 @@ const bootTasks: {
   },
 };
 
-export { bootTasks };
+export { tasks };
