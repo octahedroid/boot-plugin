@@ -4,15 +4,12 @@ const tasks: {
   bootstrap: Task;
 } = {
   bootstrap: {
-    name: "install",
-    scope: TaskScope.Global,
+    name: "Start develop mode",
+    scope: TaskScope.Workspace,
     definition: {
       type: "che",
       config: {
-        label: "install",
-        preview: {
-          notifications: "off",
-        },
+        label: "Start develop mode",
       },
       target: {
         component: "nodejs",
@@ -24,7 +21,7 @@ const tasks: {
       command: "sh",
       options: {
         cwd: "/projects/frontend",
-        shellArgs: ["-c", "'yarn && yarn develop'"],
+        shellArgs: ["-c", "yarn && yarn develop"],
       },
     },
   },
