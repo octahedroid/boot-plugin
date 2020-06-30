@@ -7,9 +7,9 @@ import * as che from "@eclipse-che/plugin";
 import { tasks } from "./tasks";
 
 const start = async (context: theia.PluginContext) => {
-  await che.workspace.getCurrentWorkspace();
-  const { bootstrap } = tasks;
-  await theia.tasks.executeTask(bootstrap);
+    await che.workspace.getCurrentWorkspace();
+    const { bootstrap } = tasks;
+    await theia.tasks.executeTask(bootstrap);
 };
-function stop() {}
+function stop() { }
 export { start, stop };
