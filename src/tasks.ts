@@ -5,9 +5,9 @@ const tasks: {
 } = {
   bootstrap: {
     name: "dev",
-    scope: TaskScope.Global,
+    scope: TaskScope.Workspace,
     definition: {
-      type: "che",
+      type: "shell",
       config: {
         label: "dev",
       },
