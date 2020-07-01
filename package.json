@@ -34,7 +34,7 @@
   "devDependencies": {
     "@eclipse-che/api": "^7.5.0-SNAPSHOT",
     "@eclipse-che/plugin": "^0.0.1-1591787202",
-    "@theianpm run developnpm run develop/plugin": "1.1.0",
+    "@theia/plugin": "1.1.0",
     "@theia/plugin-packager": "latest",
     "chokidar": "3.4.0",
     "rimraf": "2.6.2",
