@@ -6,7 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "downlevelIteration": true,
-    "module": "commonjs",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "target": "es6",
     "lib": ["es6", "webworker"],

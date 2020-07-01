@@ -4,22 +4,32 @@
 
 import * as path from "path";
 import { tasks } from "./tasks";
-import chokidar from "chokidar";
 import * as theia from "@theia/plugin";
 import * as che from "@eclipse-che/plugin";
-
-const installEffect = async (path: string) => {
-    if (/\/frontend\/package.json/.test(path)) {
-        await che.workspace.getCurrentWorkspace();
-        const { bootstrap } = tasks;
-        await theia.tasks.executeTask(bootstrap);
-    }
-};
+import WorkspaceClient from "@eclipse-che/workspace-client";
+// const workspace = await che.workspace.getCurrentWorkspace();
+//     const { bootstrap } = tasks;
+//     await theia.tasks.executeTask(bootstrap);
 
 const start = async (context: theia.PluginContext) => {
-    const cwd = path.resolve(__dirname);
-    const watcher = chokidar.watch(cwd);
-    watcher.on("add", installEffect);
+  let status = null;
+  let clientId = null;
+  const entryPoint = "/api/workspace";
+  const workspace = await che.workspace.getCurrentWorkspace();
+  const masterApiClient = WorkspaceClient.getJsonRpcApi(entryPoint);
+  const connectionPromise = masterApiClient.connect(entryPoint);
+  await connectionPromise.then(() => {
+    clientId = masterApiClient.getClientId();
+  });
+
+  const handler = (info) => {
+    console.table(info);
+  };
+  if (workspace.id) {
+    masterApiClient.subscribeWorkspaceStatus(workspace.id, handler);
+  } else {
+    console.log("No wkspc id");
+  }
 };
-function stop() { }
+function stop() {}
 export { start, stop };
