@@ -5,7 +5,7 @@ projects:
     source:
       location: "https://github.com/gatsbyjs/gatsby-starter-default.git"
       type: git
-      branch: master
+      commitId: 86a5a94e4aedb4c26bc43884bcfa07226a35be2e
 attributes:
   persistVolumes: "false"
 components:

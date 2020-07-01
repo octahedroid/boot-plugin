@@ -12,4 +12,4 @@ firstPublicationDate: "2020-06-17"
 category: Other
 spec:
   extensions:
-    - https://github.com/octahedroid/boot-plugin/releases/download/v0.0.1-test/boot_plugin.theia
+    - https://github.com/octahedroid/boot-plugin/releases/download/v0.0.3-test/boot_plugin.theia
