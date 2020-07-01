@@ -6,9 +6,9 @@ import { tasks } from "./tasks";
 import * as theia from "@theia/plugin";
 import * as che from "@eclipse-che/plugin";
 
-const runDelayedBootstrap = (resolve) => {
+const runDelayedBootstrap = (resolve: any) => {
   setTimeout(async () => {
-    const workspace = await che.workspace.getCurrentWorkspace();
+    await che.workspace.getCurrentWorkspace();
     const { bootstrap } = tasks;
     await theia.tasks.executeTask(bootstrap);
     console.log("Terminated tasks, resolving promise");
