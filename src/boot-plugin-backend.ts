@@ -4,7 +4,7 @@
 
 import * as path from "path";
 import { tasks } from "./tasks";
-import * as chokidar from "chokidar";
+import chokidar from "chokidar";
 import * as theia from "@theia/plugin";
 import * as che from "@eclipse-che/plugin";
 
