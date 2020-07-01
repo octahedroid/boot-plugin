@@ -55,6 +55,7 @@
     "backend": "lib/boot-plugin-backend.js"
   },
   "dependencies": {
-    "@eclipse-che/workspace-client": "0.0.1-1585913592"
+    "@eclipse-che/workspace-client": "0.0.1-1585913592",
+    "chokidar": "3.4.0"
   }
 }
