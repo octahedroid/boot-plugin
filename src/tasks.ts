@@ -19,7 +19,7 @@ const tasks: {
         },
         execution: {
             command: "sh",
-            args: ["-c", "'yarn && yarn develop'"],
+            args: ["-c", "'npm install && npm run develop'"],
             options: {
                 cwd: "/projects/frontend",
             },
