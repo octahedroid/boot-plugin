@@ -9,17 +9,17 @@ import * as theia from "@theia/plugin";
 import * as che from "@eclipse-che/plugin";
 
 const installEffect = async (path: string) => {
-  if (/\/frontend\/package.json/.test(path)) {
-    await che.workspace.getCurrentWorkspace();
-    const { bootstrap } = tasks;
-    await theia.tasks.executeTask(bootstrap);
-  }
+    if (/\/frontend\/package.json/.test(path)) {
+        await che.workspace.getCurrentWorkspace();
+        const { bootstrap } = tasks;
+        await theia.tasks.executeTask(bootstrap);
+    }
 };
 
 const start = async (context: theia.PluginContext) => {
-  const cwd = path.resolve(__dirname);
-  const watcher = chokidar.watch(cwd);
-  watcher.on("add", installEffect);
+    const cwd = path.resolve(__dirname);
+    const watcher = chokidar.watch(cwd);
+    watcher.on("add", installEffect);
 };
-function stop() {}
+function stop() { }
 export { start, stop };
