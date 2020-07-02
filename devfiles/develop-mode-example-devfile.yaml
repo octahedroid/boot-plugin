@@ -16,7 +16,7 @@ components:
         attributes:
           protocol: http
           public: "true"
-    memoryLimit: 2Gi
+    memoryLimit: 4Gi
     type: dockerimage
     image: "quay.io/eclipse/che-nodejs10-community:7.14.1"
     alias: nodejs
