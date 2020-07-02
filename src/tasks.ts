@@ -20,7 +20,7 @@ const tasks: {
     },
     execution: {
       command: "yarn",
-      args: [">", "install-log.txt"],
+      args: [">", "install-log.txt", "--verbose"],
       options: {
         cwd: "/projects/frontend",
       },
@@ -42,7 +42,7 @@ const tasks: {
     },
     execution: {
       command: "yarn",
-      args: [">", "preview-log.txt", "develop"],
+      args: [">", "preview-log.txt", "develop", "--verbose"],
       options: {
         cwd: "/projects/frontend",
       },
