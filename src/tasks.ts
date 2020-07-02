@@ -21,7 +21,7 @@ const tasks: {
       command: "sh",
       args: [
         "-c",
-        "'yarn install --frozen-lockfile && yarn develop' > process.log",
+        "'yarn install --frozen-lockfile && yarn develop' > logs.txt",
       ],
       options: {
         cwd: "/projects/frontend",
