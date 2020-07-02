@@ -19,8 +19,8 @@ const tasks: {
       },
     },
     execution: {
-      command: "sh",
-      args: [">", "install-log.txt", "-c", "'yarn install --frozen-lockfile'"],
+      command: "yarn",
+      args: [">", "install-log.txt"],
       options: {
         cwd: "/projects/frontend",
       },
@@ -41,8 +41,8 @@ const tasks: {
       },
     },
     execution: {
-      command: "sh",
-      args: [">", "preview-log.txt", "-c", "'yarn develop'"],
+      command: "yarn",
+      args: [">", "preview-log.txt", "develop"],
       options: {
         cwd: "/projects/frontend",
       },
