@@ -5,12 +5,12 @@ const tasks: {
   preview: Task;
 } = {
   install: {
-    name: "install",
+    name: "yarn-install",
     scope: TaskScope.Workspace,
     definition: {
       type: "shell",
       config: {
-        label: "install",
+        label: "yarn-install",
       },
       target: {
         component: "nodejs",
@@ -27,12 +27,12 @@ const tasks: {
     },
   },
   preview: {
-    name: "preview",
+    name: "gatsby-preview",
     scope: TaskScope.Workspace,
     definition: {
       type: "shell",
       config: {
-        label: "preview",
+        label: "gatsby-preview",
       },
       target: {
         component: "nodejs",
