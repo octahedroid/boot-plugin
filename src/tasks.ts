@@ -2,7 +2,6 @@ import { Task, TaskScope } from "@theia/plugin";
 
 const tasks: {
   bootstrap: Task;
-  resultCheck: Task;
 } = {
   bootstrap: {
     name: "dev",
