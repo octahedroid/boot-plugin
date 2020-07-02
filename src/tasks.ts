@@ -1,15 +1,16 @@
 import { Task, TaskScope } from "@theia/plugin";
 
 const tasks: {
-  bootstrap: Task;
+  install: Task;
+  preview: Task;
 } = {
-  bootstrap: {
-    name: "dev",
+  install: {
+    name: "install",
     scope: TaskScope.Workspace,
     definition: {
       type: "shell",
       config: {
-        label: "dev",
+        label: "install",
       },
       target: {
         component: "nodejs",
@@ -19,12 +20,29 @@ const tasks: {
     },
     execution: {
       command: "sh",
-      args: [
-        ">",
-        "logs.txt",
-        "-c",
-        "'yarn install --frozen-lockfile && yarn develop'",
-      ],
+      args: [">", "install-log.txt", "-c", "'yarn install --frozen-lockfile'"],
+      options: {
+        cwd: "/projects/frontend",
+      },
+    },
+  },
+  preview: {
+    name: "preview",
+    scope: TaskScope.Workspace,
+    definition: {
+      type: "shell",
+      config: {
+        label: "preview",
+      },
+      target: {
+        component: "nodejs",
+        containerName: "nodejs",
+        workingDir: "/projects/frontend",
+      },
+    },
+    execution: {
+      command: "sh",
+      args: [">", "preview-log.txt", "-c", "'yarn develop'"],
       options: {
         cwd: "/projects/frontend",
       },
