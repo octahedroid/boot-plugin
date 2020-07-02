@@ -9,44 +9,30 @@ const tasks: {
     scope: TaskScope.Workspace,
     definition: {
       type: "che",
-      command: "yarn > install-log.txt",
+      command: "yarn",
       config: {
-        label: "yarn-install",
+        label: "install",
       },
       target: {
         component: "nodejs",
         workingDir: "${CHE_PROJECTS_ROOT}/frontend",
       },
     },
-    // execution: {
-    //   command: "yarn",
-    //   args: [">", "install-log.txt", "--verbose"],
-    //   options: {
-    //     cwd: "/projects/frontend",
-    //   },
-    // },
   },
   preview: {
     name: "gatsby-preview",
     scope: TaskScope.Workspace,
     definition: {
       type: "che",
-      command: "yarn develop > preview-log.txt",
+      command: "yarn develop",
       config: {
-        label: "gatsby-preview",
+        label: "preview",
       },
       target: {
         component: "nodejs",
         workingDir: "${CHE_PROJECTS_ROOT}/frontend",
       },
     },
-    // execution: {
-    //   command: "yarn",
-    //   args: [">", "preview-log.txt", "develop", "--verbose"],
-    //   options: {
-    //     cwd: "/projects/frontend",
-    //   },
-    // },
   },
 };
 
