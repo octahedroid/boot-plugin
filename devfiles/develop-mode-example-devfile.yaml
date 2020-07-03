@@ -3,11 +3,11 @@ metadata:
 projects:
   - name: frontend
     source:
-      location: 'https://github.com/gatsbyjs/gatsby-starter-default.git'
+      location: "https://github.com/gatsbyjs/gatsby-starter-default.git"
       type: git
-      branch: master
+      commitId: 86a5a94e4aedb4c26bc43884bcfa07226a35be2e
 attributes:
-  persistVolumes: 'false'
+  persistVolumes: "false"
 components:
   - mountSources: true
     endpoints:
@@ -15,19 +15,19 @@ components:
         port: 8000
         attributes:
           protocol: http
-          public: 'true'
-    memoryLimit: 2Gi
+          public: "true"
+    memoryLimit: 4Gi
     type: dockerimage
-    image: 'quay.io/eclipse/che-nodejs10-community:7.14.1'
+    image: "quay.io/eclipse/che-nodejs10-community:7.14.1"
     alias: nodejs
   - type: chePlugin
     reference: >-
-      https://raw.githubusercontent.com/octahedroid/boot-plugin/master/che-plugin/meta.yml
+      https://raw.githubusercontent.com/octahedroid/boot-plugin/clone-finished-detection/che-plugin/meta.yml
 apiVersion: 1.0.0
 commands:
   - name: start develop mode
     actions:
-      - workdir: '${CHE_PROJECTS_ROOT}/frontend'
+      - workdir: "${CHE_PROJECTS_ROOT}/frontend"
         type: exec
         command: yarn && yarn start
         component: nodejs

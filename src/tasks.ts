@@ -1,27 +1,36 @@
 import { Task, TaskScope } from "@theia/plugin";
 
 const tasks: {
-  bootstrap: Task;
+  install: Task;
+  preview: Task;
 } = {
-  bootstrap: {
-    name: "dev",
+  install: {
+    name: "yarn-install",
     scope: TaskScope.Workspace,
     definition: {
-      type: "shell",
+      type: "che",
+      command: "yarn",
       config: {
-        label: "dev",
+        label: "install",
       },
       target: {
         component: "nodejs",
-        containerName: "nodejs",
-        workingDir: "/projects/frontend",
+        workingDir: "${CHE_PROJECTS_ROOT}/frontend",
       },
     },
-    execution: {
-      command: "sh",
-      args: ["-c", "'yarn && yarn develop'"],
-      options: {
-        cwd: "/projects/frontend",
+  },
+  preview: {
+    name: "gatsby-preview",
+    scope: TaskScope.Workspace,
+    definition: {
+      type: "che",
+      command: "yarn develop",
+      config: {
+        label: "preview",
+      },
+      target: {
+        component: "nodejs",
+        workingDir: "${CHE_PROJECTS_ROOT}/frontend",
       },
     },
   },
