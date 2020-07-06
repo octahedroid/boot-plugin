@@ -1,5 +1,6 @@
 import { Port } from "./port";
 import { che } from "@eclipse-che/api";
+import * as chePlugin from "@eclipse-che/plugin";
 import { WorkspacePort } from "./workspace-port";
 
 interface CheMachine {
@@ -17,9 +18,9 @@ const MAX_ALLOWED_PORT = 32000;
 const LISTEN_ALL_IPV6 = "::";
 const LISTEN_ALL_IPV4 = "0.0.0.0";
 
-const getWorkspacePorts = async (
+const getWorkspacePorts = (
   workspace: che.workspace.Workspace
-): Promise<WorkspacePort[]> => {
+): WorkspacePort[] => {
   const ports: WorkspacePort[] = [];
   if (
     !workspace ||
@@ -62,6 +63,12 @@ const logPort = async (port: Port) => {
   console.log(
     `Port exposed: ${port.portNumber}, Interface: ${port.interfaceListen}`
   );
+
+  const workspace = await chePlugin.workspace.getCurrentWorkspace();
+  const { 0: serverPort } = getWorkspacePorts(workspace).filter(
+    (port) => port.serverName === "nodejs"
+  );
+  console.log(`Server port: ${serverPort.url}`);
 };
 
 const handleOpenPort = async (port: Port) => {
