@@ -75,12 +75,12 @@ const logPort = async (port: Port) => {
 
 const handleOpenPort = async (port: Port) => {
   console.log("Logging opened port");
-
-  const { portNumber } = port;
-  if (portNumber >= MAX_ALLOWED_PORT) {
-    return;
-  }
+  console.log("Interface listen:");
   await logPort(port);
+  // const { portNumber } = port;
+  // if (portNumber >= MAX_ALLOWED_PORT) {
+  //   return;
+  // }
 };
 
 export { logPort, handleOpenPort, getWorkspacePorts };
