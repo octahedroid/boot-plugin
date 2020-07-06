@@ -4,9 +4,10 @@
 
 import { tasks } from "./tasks";
 import * as theia from "@theia/plugin";
-import * as che from "@eclipse-che/plugin";
+import { handleOpenPort } from "./utils";
 
-import { getPreviewUrl } from "./utils";
+import { PortChangesDetector } from "./port-changes-detector";
+
 const { install, preview } = tasks;
 
 const runDelayedBootstrap = (resolve: any) => {
@@ -26,19 +27,15 @@ const handleDidEndTask = async (event: theia.TaskEndEvent) => {
     await theia.tasks.executeTask(preview);
     return;
   }
-
-  if (name === "gatsby-preview") {
-    const workspace = await che.workspace.getCurrentWorkspace();
-    getPreviewUrl(workspace);
-    console.log("This task finished too and now we are previewing!");
-  }
 };
 
 theia.tasks.onDidEndTask(handleDidEndTask);
 
 const start = async (context: theia.PluginContext) => {
-  const workspace = await che.workspace.getCurrentWorkspace();
-  getPreviewUrl(workspace);
+  const portChangesDetector = new PortChangesDetector();
+  portChangesDetector.onDidOpenPort(handleOpenPort);
+  await portChangesDetector.init();
+  portChangesDetector.check();
   new Promise(runDelayedBootstrap);
 };
 

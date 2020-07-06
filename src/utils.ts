@@ -1,49 +1,82 @@
+import { Port } from "./port";
 import { che } from "@eclipse-che/api";
+import { WorkspacePort } from "./workspace-port";
 
 interface CheMachine {
-  name: string;
+  props: che.workspace.Machine;
+  id: string;
 }
 
-const MACHINE = "nodejs";
+interface CheMachineServer {
+  name: string;
+  props: che.workspace.Server;
+}
 
-const getMachineServers = (machine: che.workspace.Machine) => {
-  if (!machine) {
-    return {};
+const MAX_ALLOWED_PORT = 32000;
+
+const LISTEN_ALL_IPV6 = "::";
+const LISTEN_ALL_IPV4 = "0.0.0.0";
+
+const getWorkspacePorts = async (
+  workspace: che.workspace.Workspace
+): Promise<WorkspacePort[]> => {
+  const ports: WorkspacePort[] = [];
+  if (
+    !workspace ||
+    !workspace.id ||
+    !workspace.runtime ||
+    !workspace.runtime!.machines
+  ) {
+    return ports;
   }
 
-  const { servers } = machine;
-  console.table(servers);
-};
+  const machines = workspace.runtime!.machines!;
 
-const bySelectedMachine = (selectedMachineName: string, machines: any) => {
-  const { 0: machineID } = Object.keys(machines).filter(
-    (machineName) => machineName === selectedMachineName
-  );
-  Object.keys(machines).map((machineName) => {
-    console.log(`Machine: ${machineName}`);
-    console.log(`Attrs: ${machines[machineName].attributes}`);
+  const machinesById: CheMachine[] =
+    Object.keys(machines).map((id) => ({
+      id,
+      props: machines[id],
+    })) || [];
+
+  machinesById.map((machine: CheMachine) => {
+    const servers = machine.props.servers!;
+    const serversByName: CheMachineServer[] = Object.keys(servers).map(
+      (name) => ({
+        name,
+        props: servers[name],
+      })
+    );
+
+    serversByName.map(({ name: serverName, props }: CheMachineServer) => {
+      const url = props.url!;
+      const attributes = props.attributes!;
+      const portNumber = attributes.port!;
+      ports.push({ url, portNumber, serverName });
+    });
   });
-  const { [machineID]: selectedMachine } = machines || {};
-  return selectedMachine;
+
+  return ports;
 };
 
-const getPreviewUrl = async (workspace: che.workspace.Workspace) => {
-  if (!workspace || !workspace.id || !workspace.runtime) {
-    return "";
+const logPort = async (port: Port) => {
+  console.log(
+    `Port exposed: ${port.portNumber}, Interface: ${port.interfaceListen}`
+  );
+};
+
+const handleOpenPort = async (port: Port) => {
+  console.log("Logging opened port");
+
+  const { portNumber, interfaceListen } = port;
+  if (portNumber >= MAX_ALLOWED_PORT) {
+    return;
   }
 
-  const { id } = workspace;
-
-  const { machines } = workspace.runtime! || { machines: {} };
-  const selectedMachine = bySelectedMachine(MACHINE, machines);
-
-  console.log(`Workspace: ${id}`);
-  console.log("Machines:");
-  console.table(machines);
-  console.log("Selected Machine:");
-  console.log(selectedMachine);
-  console.log("Servers:");
-  getMachineServers(selectedMachine);
+  if (
+    interfaceListen !== LISTEN_ALL_IPV4 &&
+    interfaceListen !== LISTEN_ALL_IPV6
+  ) {
+  }
 };
 
-export { getPreviewUrl };
+export { logPort, handleOpenPort, getWorkspacePorts };
