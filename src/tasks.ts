@@ -24,8 +24,7 @@ const tasks: {
     scope: TaskScope.Workspace,
     definition: {
       type: "che",
-      command:
-        "yarn devevelop -H 0.0.0.0 > preview.log & echo $! > process.pid",
+      command: "yarn develop -H 0.0.0.0 > preview.log & echo $! > process.pid",
       config: {
         label: "preview",
       },
