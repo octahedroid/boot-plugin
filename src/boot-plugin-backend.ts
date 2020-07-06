@@ -27,7 +27,7 @@ const handleDidEndTask = async (event: theia.TaskEndEvent) => {
     return;
   }
 
-  if (name === "yarn-preview") {
+  if (name === "gatsby-preview") {
     console.log("This task finished too and now we are previewing!");
   }
 };
