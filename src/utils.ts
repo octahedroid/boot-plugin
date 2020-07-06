@@ -22,12 +22,19 @@ const getWorkspacePorts = (
   workspace: che.workspace.Workspace
 ): WorkspacePort[] => {
   const ports: WorkspacePort[] = [];
-  if (
-    !workspace ||
-    !workspace.id ||
-    !workspace.runtime ||
-    !workspace.runtime!.machines
-  ) {
+  if (!workspace) {
+    return ports;
+  }
+
+  if (!workspace.id) {
+    return ports;
+  }
+
+  if (!workspace.runtime) {
+    return ports;
+  }
+
+  if (!workspace.runtime!.machines) {
     return ports;
   }
 
