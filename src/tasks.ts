@@ -24,7 +24,7 @@ const tasks: {
     scope: TaskScope.Workspace,
     definition: {
       type: "che",
-      command: "yarn develop -H 0.0.0.0",
+      command: "yarn dev",
       config: {
         label: "preview",
       },
