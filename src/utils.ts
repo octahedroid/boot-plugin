@@ -66,9 +66,11 @@ const logPort = async (port: Port) => {
 
   const workspace = await chePlugin.workspace.getCurrentWorkspace();
   const { 0: serverPort } = getWorkspacePorts(workspace).filter(
-    (port) => port.serverName === "nodejs"
+    (workspacePort) =>
+      parseInt(workspacePort.portNumber, 10) === port.portNumber &&
+      workspacePort.serverName === "nodejs"
   );
-  console.log(`Server port: ${serverPort.url}`);
+  console.log(`Server port: ${serverPort && serverPort.url}`);
 };
 
 const handleOpenPort = async (port: Port) => {
