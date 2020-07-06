@@ -47,7 +47,7 @@ const getWorkspacePorts = (
     })) || [];
 
   machinesById.map((machine: CheMachine) => {
-    const servers = machine.props.servers!;
+    const servers = machine.props.servers || {};
     const serversByName: CheMachineServer[] = Object.keys(servers).map(
       (name) => ({
         name,
