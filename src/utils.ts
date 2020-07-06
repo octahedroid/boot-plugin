@@ -19,6 +19,10 @@ const bySelectedMachine = (selectedMachineName: string, machines: any) => {
   const { 0: machineID } = Object.keys(machines).filter(
     (machineName) => machineName === selectedMachineName
   );
+  Object.keys(machines).map((machineName) => {
+    console.log(`Machine: ${machineName}`);
+    console.log(`Attrs: ${machines[machineName].attributes}`);
+  });
   const { [machineID]: selectedMachine } = machines || {};
   return selectedMachine;
 };

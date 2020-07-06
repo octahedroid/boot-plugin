@@ -28,6 +28,8 @@ const handleDidEndTask = async (event: theia.TaskEndEvent) => {
   }
 
   if (name === "gatsby-preview") {
+    const workspace = await che.workspace.getCurrentWorkspace();
+    getPreviewUrl(workspace);
     console.log("This task finished too and now we are previewing!");
   }
 };
