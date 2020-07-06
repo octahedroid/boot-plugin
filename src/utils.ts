@@ -85,6 +85,7 @@ const handleOpenPort = async (port: Port) => {
     interfaceListen !== LISTEN_ALL_IPV4 &&
     interfaceListen !== LISTEN_ALL_IPV6
   ) {
+    await logPort(port);
   }
 };
 
