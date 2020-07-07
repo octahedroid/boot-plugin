@@ -71,6 +71,7 @@ const pollingEffect = async (url: string) => {
       const { statusCode: status } = res;
       status !== 200 &&
         (currentTimeout = setTimeout(() => pollingEffect(url), 0));
+      status !== 200 && console.log(`Request finished on a :${status}`);
       status === 200 && console.log("URL can now be previewed!:", url);
     });
   });
@@ -92,8 +93,6 @@ const logPort = async (port: Port) => {
     const { url } = serverPort;
     currentTimeout = setTimeout(() => pollingEffect(url), 0);
   }
-
-  console.assert(fetch, "No fetch");
 };
 
 const handleOpenPort = async (port: Port) => {
