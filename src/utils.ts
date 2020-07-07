@@ -1,7 +1,7 @@
 import https from "https";
 import { Port } from "./port";
 import { che } from "@eclipse-che/api";
-import { IncomingMessage } from "http";
+import http from "http";
 import * as chePlugin from "@eclipse-che/plugin";
 import { WorkspacePort } from "./workspace-port";
 
@@ -66,7 +66,14 @@ const getWorkspacePorts = (
 };
 
 const pollingEffect = async (url: string) => {
-  https.get(url, (res: IncomingMessage) => {
+  console.log("http:");
+  console.log(http);
+  console.table(http);
+  console.log("https:");
+  console.log(https);
+  console.table(https);
+
+  https.get(url, (res: http.IncomingMessage) => {
     res.on("end", () => {
       const { statusCode: status } = res;
       status !== 200 &&
