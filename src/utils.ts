@@ -67,8 +67,6 @@ const getWorkspacePorts = (
 
 const pollingEffect = async (url: string) => {
   https.get(url, (res: http.IncomingMessage) => {
-    console.log("Incoming message:");
-    console.table(res);
     res.on("data", () => {
       const { statusCode: status } = res;
       status !== 200 &&
@@ -101,10 +99,6 @@ const handleOpenPort = async (port: Port) => {
   console.log("Logging opened port");
   console.log("Interface listen:");
   await logPort(port);
-  // const { portNumber } = port;
-  // if (portNumber >= MAX_ALLOWED_PORT) {
-  //   return;
-  // }
 };
 
 export { logPort, handleOpenPort, getWorkspacePorts };
