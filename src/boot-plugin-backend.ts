@@ -11,34 +11,34 @@ import { PortChangesDetector } from "./port-changes-detector";
 const { install, preview } = tasks;
 
 const runDelayedBootstrap = (resolve: any) => {
-  console.log("Setting 30 secs timeout for dependencies to install");
-  setTimeout(async () => {
-    await theia.tasks.executeTask(install);
-    resolve();
-  }, 30000);
+    console.log("Setting 30 secs timeout for dependencies to install");
+    setTimeout(async () => {
+        await theia.tasks.executeTask(install);
+        resolve();
+    }, 30000);
 };
 
 const handleDidEndTask = async (event: theia.TaskEndEvent) => {
-  const { execution } = event;
-  const { task } = execution;
-  const { name } = task;
+    const { execution } = event;
+    const { task } = execution;
+    const { name } = task;
 
-  if (name === "yarn-install") {
-    await theia.tasks.executeTask(preview);
-    return;
-  }
+    if (name === "yarn-install") {
+        await theia.tasks.executeTask(preview);
+        return;
+    }
 };
 
 theia.tasks.onDidEndTask(handleDidEndTask);
 
 const start = async (context: theia.PluginContext) => {
-  const portChangesDetector = new PortChangesDetector();
-  portChangesDetector.onDidOpenPort(handleOpenPort);
-  await portChangesDetector.init();
-  portChangesDetector.check();
-  new Promise(runDelayedBootstrap);
+    const portChangesDetector = new PortChangesDetector();
+    portChangesDetector.onDidOpenPort(handleOpenPort);
+    await portChangesDetector.init();
+    portChangesDetector.check();
+    new Promise(runDelayedBootstrap);
 };
 
-function stop() {}
+function stop() { }
 
 export { start, stop };

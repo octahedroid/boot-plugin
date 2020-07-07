@@ -12,7 +12,7 @@ import { PortScanner, AbstractInternalScanner } from "./port-scanner";
 import { Port } from "./port";
 
 export interface PortCallback {
-  (port: Port): void;
+    (port: Port): void;
 }
 
 /**
@@ -20,68 +20,68 @@ export interface PortCallback {
  * @author Florent Benoit
  */
 export class PortChangesDetector {
-  private static readonly WAIT = 3000;
-  private openedPorts: Port[] = [];
+    private static readonly WAIT = 3000;
+    private openedPorts: Port[] = [];
 
-  private readonly portScanner: PortScanner;
+    private readonly portScanner: PortScanner;
 
-  private onDidOpenPorts: ((openPort: Port) => void)[] = [];
-  private onDidClosePorts: ((closedPort: Port) => void)[] = [];
+    private onDidOpenPorts: ((openPort: Port) => void)[] = [];
+    private onDidClosePorts: ((closedPort: Port) => void)[] = [];
 
-  public onDidOpenPort(callback: PortCallback): void {
-    this.onDidOpenPorts.push(callback);
-  }
+    public onDidOpenPort(callback: PortCallback): void {
+        this.onDidOpenPorts.push(callback);
+    }
 
-  public onDidClosePort(callback: PortCallback): void {
-    this.onDidClosePorts.push(callback);
-  }
+    public onDidClosePort(callback: PortCallback): void {
+        this.onDidClosePorts.push(callback);
+    }
 
-  constructor(internalScanner?: AbstractInternalScanner) {
-    this.portScanner = new PortScanner(internalScanner);
-  }
+    constructor(internalScanner?: AbstractInternalScanner) {
+        this.portScanner = new PortScanner(internalScanner);
+    }
 
-  /**
-   * Get opened ports.
-   */
-  public async init(): Promise<void> {
-    this.openedPorts = await this.portScanner.getListeningPorts();
-  }
+    /**
+     * Get opened ports.
+     */
+    public async init(): Promise<void> {
+        this.openedPorts = await this.portScanner.getListeningPorts();
+    }
 
-  public async monitor(): Promise<void> {
-    // grab new port opened and compare
-    const scanPorts = await this.portScanner.getListeningPorts();
+    public async monitor(): Promise<void> {
+        // grab new port opened and compare
+        const scanPorts = await this.portScanner.getListeningPorts();
 
-    // not yet opened ?
-    const newOpened = scanPorts.filter(
-      (port) =>
-        !this.openedPorts.some(
-          (openPort) => openPort.portNumber === port.portNumber
-        )
-    );
+        // not yet opened ?
+        const newOpened = scanPorts.filter(
+            (port) =>
+                !this.openedPorts.some(
+                    (openPort) => openPort.portNumber === port.portNumber
+                )
+        );
 
-    // new closed
-    const closed = this.openedPorts.filter(
-      (port) =>
-        !scanPorts.some((openPort) => openPort.portNumber === port.portNumber)
-    );
+        // new closed
+        const closed = this.openedPorts.filter(
+            (port) =>
+                !scanPorts.some((openPort) => openPort.portNumber === port.portNumber)
+        );
 
-    // send events
-    this.onDidOpenPorts.map((func) => {
-      newOpened.map((port) => func(port));
-    });
+        // send events
+        this.onDidOpenPorts.map((func) => {
+            newOpened.map((port) => func(port));
+        });
 
-    this.onDidClosePorts.map((func) => {
-      closed.map((port) => func(port));
-    });
+        this.onDidClosePorts.map((func) => {
+            closed.map((port) => func(port));
+        });
 
-    this.openedPorts = scanPorts;
-  }
+        this.openedPorts = scanPorts;
+    }
 
-  public async check(): Promise<void> {
-    // monitor
-    await this.monitor();
+    public async check(): Promise<void> {
+        // monitor
+        await this.monitor();
 
-    // start again check
-    setTimeout(() => this.check(), PortChangesDetector.WAIT);
-  }
+        // start again check
+        setTimeout(() => this.check(), PortChangesDetector.WAIT);
+    }
 }
