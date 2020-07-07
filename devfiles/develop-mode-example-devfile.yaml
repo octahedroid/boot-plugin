@@ -5,7 +5,7 @@ projects:
     source:
       location: "https://github.com/jmolivas/gatsby-casper.git"
       type: git
-      commitId: 86a5a94e4aedb4c26bc43884bcfa07226a35be2e
+      branch: master
 attributes:
   persistVolumes: "false"
 components:
