@@ -4,7 +4,6 @@ import { che } from "@eclipse-che/api";
 import * as http from "http";
 import * as chePlugin from "@eclipse-che/plugin";
 import { WorkspacePort } from "./workspace-port";
-import * as cert from "ssl-roo";
 
 interface CheMachine {
   props: che.workspace.Machine;
