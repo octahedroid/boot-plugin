@@ -1,7 +1,8 @@
-import * as https from "https";
-import { Port } from "./port";
-import { che } from "@eclipse-che/api";
+import { parse } from "url";
 import * as http from "http";
+import { Port } from "./port";
+import * as https from "https";
+import { che } from "@eclipse-che/api";
 import * as chePlugin from "@eclipse-che/plugin";
 import { WorkspacePort } from "./workspace-port";
 
@@ -66,24 +67,24 @@ const getWorkspacePorts = (
 };
 
 const pollingEffect = async (url: string) => {
-  https.get(
-    {
-      path: url,
+  const urlOptions = parse(url);
+  const options = {
+    ...urlOptions,
+    rejectUnauthorized: false,
+    agent: new https.Agent({
       rejectUnauthorized: false,
-      agent: new https.Agent({
-        rejectUnauthorized: false,
-      }),
-    },
-    (res: http.IncomingMessage) => {
-      res.on("data", () => {
-        const { statusCode: status } = res;
-        status !== 200 &&
-          (currentTimeout = setTimeout(() => pollingEffect(url), 0));
-        status !== 200 && console.log(`Request finished on a :${status}`);
-        status === 200 && console.log("URL can now be previewed!:", url);
-      });
-    }
-  );
+    }),
+  };
+
+  https.get(options, (res: http.IncomingMessage) => {
+    res.on("data", () => {
+      const { statusCode: status } = res;
+      status !== 200 &&
+        (currentTimeout = setTimeout(() => pollingEffect(url), 0));
+      status !== 200 && console.log(`Request finished on a :${status}`);
+      status === 200 && console.log("URL can now be previewed!:", url);
+    });
+  });
 };
 
 const logPort = async (port: Port) => {
