@@ -3,7 +3,7 @@ metadata:
 projects:
   - name: frontend
     source:
-      location: "https://github.com/gatsbyjs/gatsby-starter-default.git"
+      location: "https://github.com/jmolivas/gatsby-casper.git"
       type: git
       commitId: 86a5a94e4aedb4c26bc43884bcfa07226a35be2e
 attributes:
