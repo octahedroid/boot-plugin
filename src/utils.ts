@@ -1,7 +1,7 @@
-import https from "https";
+import * as https from "https";
 import { Port } from "./port";
 import { che } from "@eclipse-che/api";
-import http from "http";
+import * as http from "http";
 import * as chePlugin from "@eclipse-che/plugin";
 import { WorkspacePort } from "./workspace-port";
 
