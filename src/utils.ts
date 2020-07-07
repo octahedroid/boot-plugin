@@ -13,11 +13,8 @@ interface CheMachineServer {
   props: che.workspace.Server;
 }
 
-const MAX_ALLOWED_PORT = 32000;
-
-const LISTEN_ALL_IPV6 = "::";
-const LISTEN_ALL_IPV4 = "0.0.0.0";
-
+let currentTimeout: NodeJS.Timeout | null = null;
+let pollingStatus = -1;
 const getWorkspacePorts = (
   workspace: che.workspace.Workspace
 ): WorkspacePort[] => {
@@ -66,6 +63,12 @@ const getWorkspacePorts = (
   return ports;
 };
 
+const pollingEffect = async (url: string) => {
+  const { status } = await fetch(url);
+  status !== 200 && (currentTimeout = setTimeout(() => pollingEffect(url), 0));
+  status === 200 && console.log("URL can now be previewed!:", url);
+};
+
 const logPort = async (port: Port) => {
   console.log(
     `Port exposed: ${port.portNumber}, Interface: ${port.interfaceListen}`
@@ -77,7 +80,13 @@ const logPort = async (port: Port) => {
       parseInt(workspacePort.portNumber, 10) === port.portNumber &&
       workspacePort.serverName === "nodejs"
   );
-  console.log(`Server port: ${serverPort && serverPort.url}`);
+
+  if (serverPort && serverPort.url && fetch) {
+    const { url } = serverPort;
+    currentTimeout = setTimeout(() => pollingEffect(url), 0);
+  }
+
+  console.assert(fetch, "No fetch");
 };
 
 const handleOpenPort = async (port: Port) => {
