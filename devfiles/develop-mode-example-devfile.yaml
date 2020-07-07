@@ -22,7 +22,7 @@ components:
     alias: nodejs
   - type: chePlugin
     reference: >-
-      https://raw.githubusercontent.com/octahedroid/boot-plugin/clone-finished-detection/che-plugin/meta.yml
+      https://raw.githubusercontent.com/octahedroid/boot-plugin/url-log/che-plugin/meta.yml
 apiVersion: 1.0.0
 commands:
   - name: start develop mode
