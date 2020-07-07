@@ -66,15 +66,10 @@ const getWorkspacePorts = (
 };
 
 const pollingEffect = async (url: string) => {
-  console.log("http:");
-  console.log(http);
-  console.table(http);
-  console.log("https:");
-  console.log(https);
-  console.table(https);
-
   https.get(url, (res: http.IncomingMessage) => {
-    res.on("end", () => {
+    console.log("Incoming message:");
+    console.table(res);
+    res.on("data", () => {
       const { statusCode: status } = res;
       status !== 200 &&
         (currentTimeout = setTimeout(() => pollingEffect(url), 0));
