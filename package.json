@@ -36,7 +36,6 @@
     "@eclipse-che/plugin": "^0.0.1-1591787202",
     "@theia/plugin": "1.1.0",
     "@theia/plugin-packager": "latest",
-    "@types/isomorphic-fetch": "0.0.35",
     "chokidar": "3.4.0",
     "rimraf": "2.6.2",
     "typescript": "2.9.2",
@@ -57,7 +56,6 @@
     "backend": "lib/boot-plugin-backend.js"
   },
   "dependencies": {
-    "@eclipse-che/workspace-client": "0.0.1-1585913592",
-    "isomorphic-fetch": "2.2.1"
+    "@eclipse-che/workspace-client": "0.0.1-1585913592"
   }
 }
