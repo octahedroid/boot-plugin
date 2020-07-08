@@ -3,9 +3,9 @@ metadata:
 projects:
   - name: frontend
     source:
-      location: "https://github.com/gatsbyjs/gatsby-starter-default.git"
+      location: "https://github.com/jmolivas/gatsby-casper.git"
       type: git
-      commitId: 86a5a94e4aedb4c26bc43884bcfa07226a35be2e
+      branch: master
 attributes:
   persistVolumes: "false"
 components:
@@ -22,7 +22,7 @@ components:
     alias: nodejs
   - type: chePlugin
     reference: >-
-      https://raw.githubusercontent.com/octahedroid/boot-plugin/clone-finished-detection/che-plugin/meta.yml
+      https://raw.githubusercontent.com/octahedroid/boot-plugin/master/che-plugin/meta.yml
 apiVersion: 1.0.0
 commands:
   - name: start develop mode

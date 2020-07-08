@@ -4,6 +4,9 @@
 
 import { tasks } from "./tasks";
 import * as theia from "@theia/plugin";
+import { handleOpenPort } from "./utils";
+
+import { PortChangesDetector } from "./port-changes-detector";
 
 const { install, preview } = tasks;
 
@@ -24,16 +27,15 @@ const handleDidEndTask = async (event: theia.TaskEndEvent) => {
         await theia.tasks.executeTask(preview);
         return;
     }
-
-    if (name === "yarn-preview") {
-        console.log("previewing task ended");
-        return;
-    }
 };
 
 theia.tasks.onDidEndTask(handleDidEndTask);
 
 const start = async (context: theia.PluginContext) => {
+    const portChangesDetector = new PortChangesDetector();
+    portChangesDetector.onDidOpenPort(handleOpenPort);
+    await portChangesDetector.init();
+    portChangesDetector.check();
     new Promise(runDelayedBootstrap);
 };
 
